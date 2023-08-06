@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/osoba")
-public class DatabazeController {
+public class DatabaseController {
 
-    DatabazeService databazeService = new DatabazeService();
+    DatabaseService databazeService = new DatabaseService();
 
     @PostMapping
     public ResponseEntity<?> pridejOsobu(@RequestBody Person osoba)  {
