@@ -7,15 +7,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class DatabazeService {
     @Autowired
-    OsobRepository repository;
+    PersonRepository repository;
 
-    public ResponseEntity<?> pridejOsobu(Osoba osoba) {
-        repository.save(osoba);
+    public ResponseEntity<?> addPerson(Person person) {
+        repository.save(person);
     }
-    public ResponseEntity<?> odeberOsobu(String rodneCislo) {
+    public ResponseEntity<?> removePerson(String personalNumber) {
 
     }
-    public ResponseEntity<?> vyhledejOsobu(String rodneCislo) {
+    public ResponseEntity<?> searchPerson(String personalNumber) {
 
     }
 }

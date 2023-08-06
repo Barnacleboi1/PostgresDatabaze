@@ -1,6 +1,5 @@
 package com.test.DatabazeOsobPostgres;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +11,9 @@ public class DatabazeController {
     DatabazeService databazeService = new DatabazeService();
 
     @PostMapping
-    public ResponseEntity<?> pridejOsobu(@RequestBody Osoba osoba)  {
+    public ResponseEntity<?> pridejOsobu(@RequestBody Person osoba)  {
         try {
-            return databazeService.pridejOsobu(osoba);
+            return databazeService.addPerson(osoba);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Osoba nebyla přidána: " + e.getMessage());
         }
@@ -22,7 +21,7 @@ public class DatabazeController {
     @DeleteMapping("/{rodneCislo}")
     public ResponseEntity<?> odeberOsobu(@PathVariable String rodneCislo) {
         try {
-            return databazeService.odeberOsobu(rodneCislo);
+            return databazeService.removePerson(rodneCislo);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Osoba nebyla úspěšně odebrána: " + e.getMessage());
         }
@@ -30,7 +29,7 @@ public class DatabazeController {
     @GetMapping("/{rodneCislo}")
     public ResponseEntity<?> vyhledejOsobu(@PathVariable String rodneCislo) {
         try {
-            return databazeService.vyhledejOsobu(rodneCislo);
+            return databazeService.searchPerson(rodneCislo);
         } catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Osoba nebyla vyhledána: " + e.getMessage());
         }

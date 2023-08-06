@@ -2,5 +2,5 @@ package com.test.DatabazeOsobPostgres;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OsobRepository extends JpaRepository<Osoba, String> {
+public interface PersonRepository extends JpaRepository<Person, String> {
 }
