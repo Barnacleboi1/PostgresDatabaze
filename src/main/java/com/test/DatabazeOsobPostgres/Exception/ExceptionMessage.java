@@ -14,16 +14,4 @@ public class ExceptionMessage {
         this.statusCode = statusCode;
         this.timeStamp = timeStamp;
     }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public HttpStatus getStatusCode() {
-        return statusCode;
-    }
-
-    public ZonedDateTime getTimeStamp() {
-        return timeStamp;
-    }
 }
