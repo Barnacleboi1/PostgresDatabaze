@@ -1,37 +1,31 @@
 package com.test.DatabazeOsobPostgres;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/osoba")
+@RequestMapping("/api/person")
 public class DatabaseController {
 
-    DatabaseService databazeService = new DatabaseService();
+    DatabaseService databazeService;
+
+    @Autowired
+    public DatabaseController(DatabaseService databazeService) {
+        this.databazeService = databazeService;
+    }
 
     @PostMapping
-    public ResponseEntity<?> pridejOsobu(@RequestBody Person osoba)  {
-        try {
-            return databazeService.addPerson(osoba);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Osoba nebyla přidána: " + e.getMessage());
-        }
+    public ResponseEntity<?> addPerson(@RequestBody Person person)  {
+        return databazeService.addPerson(person);
     }
-    @DeleteMapping("/{rodneCislo}")
-    public ResponseEntity<?> odeberOsobu(@PathVariable String rodneCislo) {
-        try {
-            return databazeService.removePerson(rodneCislo);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Osoba nebyla úspěšně odebrána: " + e.getMessage());
-        }
+    @DeleteMapping("/{personalNumber}")
+    public ResponseEntity<?> removePerson(@PathVariable String personalNumber) {
+        return databazeService.removePerson(personalNumber);
     }
-    @GetMapping("/{rodneCislo}")
-    public ResponseEntity<?> vyhledejOsobu(@PathVariable String rodneCislo) {
-        try {
-            return databazeService.searchPerson(rodneCislo);
-        } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Osoba nebyla vyhledána: " + e.getMessage());
-        }
+    @GetMapping("/{personalNumber}")
+    public Person searchPerson(@PathVariable String personalNumber) {
+        return databazeService.searchPerson(personalNumber);
     }
 }
