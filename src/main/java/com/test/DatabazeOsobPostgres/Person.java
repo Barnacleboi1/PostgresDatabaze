@@ -1,8 +1,11 @@
 package com.test.DatabazeOsobPostgres;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -14,24 +17,29 @@ public class Person {
             name = "personal_number",
             nullable = false
     )
+    @JsonProperty
     private String personalNumber;
     @Column(
             name = "name",
             nullable = false,
             columnDefinition = "TEXT"
     )
+    @JsonProperty
     private String name;
     @Column(
             name = "surname",
             nullable = false,
             columnDefinition = "TEXT"
     )
+    @JsonProperty
     private String surname;
     @Column(
             name = "age",
             nullable = false
     )
+    @JsonProperty
     private int age;
+    @JsonCreator
     public Person(String name, String surname, String personalNumber) {
         this.name = name;
         this.surname = surname;
@@ -53,6 +61,11 @@ public class Person {
     public String getPersonalNumber() {
         return personalNumber;
     }
+
+    public void setPersonalNumber(String personalNumber) {
+        this.personalNumber = personalNumber;
+    }
+
     public int vypocetVeku() {
         int stoletiNarozeni;
 
